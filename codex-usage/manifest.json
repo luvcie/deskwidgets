@@ -1,0 +1,24 @@
+{
+    "id": "codex-usage",
+    "name": "Codex Usage Desktop Widget",
+    "version": "1.0.0",
+    "author": "luvcie",
+    "description": "codex rate limit bars (5h and weekly) on the desktop. backend command and refresh interval configurable in the widget settings",
+    "license": "MIT",
+    "repository": "https://github.com/luvcie/deskwidgets",
+    "minNoctaliaVersion": "4.7.0",
+    "tags": [
+        "Desktop",
+        "AI"
+    ],
+    "entryPoints": {
+        "desktopWidget": "CodexUsage.qml",
+        "desktopWidgetSettings": "CodexUsageSettings.qml"
+    },
+    "metadata": {
+        "showBackground": true,
+        "roundedCorners": true,
+        "command": "",
+        "intervalSeconds": 60
+    }
+}
