@@ -1,0 +1,17 @@
+# Noctalia 5.x plugin catalog for this repo.
+# Hand-written, not generated. One [[plugin]] row per plugin subdirectory.
+# The per-plugin plugin.toml stays authoritative; the host re-reads it on enable.
+# The subdirectory for an id is the part after the "/": "luvcie/agent-usage" lives at "agent-usage/".
+
+[[plugin]]
+id = "luvcie/agent-usage"
+name = "Agent Usage"
+version = "1.0.0"
+updated_at = 1793159710
+added_at = 1793159710
+author = "luvcie"
+license = "MIT"
+icon = "chart-donut-3"
+description = "codex, claude and antigravity rate limit bars on the desktop"
+plugin_api = 24
+tags = ["ai", "desktop", "indicator", "utility"]
