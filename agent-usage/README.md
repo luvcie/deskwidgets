@@ -1,7 +1,7 @@
-# agent usage
+# Agent Usage Desktop Widget
 
 rate limit bars for codex, claude and antigravity on the desktop. each provider
-reads the login its cli already keeps on disk, so no backend is needed.
+reads the login file its cli already keeps on disk.
 
 ## Plugin
 
@@ -12,14 +12,17 @@ reads the login its cli already keeps on disk, so no backend is needed.
 
 ## Requirements
 
-no external packages. each provider needs its own cli logged in once: `codex`
-for codex, `claude` for claude, `agy` for antigravity. a provider that is not
-logged in shows a hint in its section instead of bars.
+- `find` on `PATH`. only the codex fallback uses it, to locate the newest
+  session log when the live codex call is not usable.
+- each provider needs its own cli logged in once: `codex` for codex, `claude`
+  for claude, `agy` for antigravity. a provider that is not logged in shows a
+  hint in its section instead of bars.
 
 ## Usage
 
-install the plugin, then add agent usage from the desktop widget editor. open
-the widget inspector to choose the provider. drag the card where you want it.
+install the plugin, then add the agent usage desktop widget from the desktop
+widget editor. open the widget inspector to choose the provider. drag the card
+where you want it.
 
 ## Settings
 
@@ -30,12 +33,21 @@ the widget inspector to choose the provider. drag the card where you want it.
 
 ## Notes
 
-- reads these local files and never writes them: `~/.codex/auth.json` (falls
-  back to the newest file under `~/.codex/sessions`),
-  `$CLAUDE_CONFIG_DIR/.credentials.json` or `~/.claude/.credentials.json`,
-  `~/.gemini/antigravity-cli/antigravity-oauth-token` and
-  `~/.gemini/oauth_creds.json`.
-- calls the codex wham usage endpoint, the anthropic oauth usage endpoint and
-  the antigravity code assist quota endpoint.
-- never refreshes a token. if the widget says the login expired, run the
-  matching cli once so it refreshes its own token.
+- reads these local files. nothing is written.
+  - `~/.codex/auth.json`: codex access token and account id.
+  - `~/.codex/sessions/*.jsonl`: codex fallback only. the newest file by mtime
+    is read and only its `rate_limits` fields are used.
+  - `$CLAUDE_CONFIG_DIR/.credentials.json` or `~/.claude/.credentials.json`:
+    claude oauth access token.
+  - `~/.gemini/antigravity-cli/antigravity-oauth-token`, then
+    `~/.gemini/oauth_creds.json`: antigravity access token.
+- network calls, each sent with the provider's bearer token:
+  - `GET https://chatgpt.com/backend-api/wham/usage` (codex)
+  - `GET https://api.anthropic.com/api/oauth/usage` (claude)
+  - `POST https://daily-cloudcode-pa.sandbox.googleapis.com/v1internal:retrieveUserQuota`
+    with an empty json body (antigravity)
+- processes spawned: only `find`, only on the codex fallback, run directly
+  without a shell. argv is `find <HOME>/.codex/sessions -name *.jsonl -printf`
+  with the format `%T@ %p` followed by a newline, with a 10 second timeout.
+- tokens are never refreshed, never written and never logged. if the widget says
+  the login expired, run the matching cli once to refresh its token.

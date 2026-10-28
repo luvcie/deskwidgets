@@ -1,10 +1,39 @@
 {
-  "settings.provider.label": "Provider",
-  "settings.provider.description": "Which provider this widget shows. All shows codex, claude and antigravity stacked.",
-  "settings.provider.options.all": "All",
-  "settings.provider.options.codex": "Codex",
-  "settings.provider.options.claude": "Claude",
-  "settings.provider.options.agy": "Antigravity",
-  "settings.interval_seconds.label": "Refresh interval",
-  "settings.interval_seconds.description": "How often to fetch usage (in seconds)."
+  "settings": {
+    "provider": {
+      "label": "Provider",
+      "description": "Which provider this widget shows. All shows codex, claude and antigravity stacked.",
+      "options": {
+        "all": "All",
+        "codex": "Codex",
+        "claude": "Claude",
+        "agy": "Antigravity"
+      }
+    },
+    "interval_seconds": {
+      "label": "Refresh interval",
+      "description": "How often to fetch usage (in seconds)."
+    }
+  },
+  "status": {
+    "loading": "loading...",
+    "not_logged_in": "not logged in (run {cli})",
+    "login_expired": "login expired (run {cli})",
+    "network_error": "network error",
+    "unsupported_platform": "not supported on this system",
+    "provider_failed": "provider failed to load",
+    "could_not_read": "could not read usage"
+  },
+  "window": {
+    "weekly": "weekly",
+    "days": "{n}d",
+    "hours": "{n}h",
+    "used": "{percent}% used",
+    "resets_in": "resets in {time}"
+  },
+  "countdown": {
+    "days_hours": "{d}d {h}h",
+    "hours_minutes": "{h}h {m}m",
+    "minutes": "{m}m"
+  }
 }

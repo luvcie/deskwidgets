@@ -87,24 +87,24 @@ local function hintText(name)
     return nil
   end
   if status == "loading" then
-    return "loading..."
+    return noctalia.tr("status.loading")
   end
   if status == "not_configured" then
-    return "not logged in (run " .. CLI[name] .. ")"
+    return noctalia.tr("status.not_logged_in", { cli = CLI[name] })
   end
   if status == "auth_expired" then
-    return "login expired (run " .. CLI[name] .. ")"
+    return noctalia.tr("status.login_expired", { cli = CLI[name] })
   end
   if status == "network_error" then
-    return "network error"
+    return noctalia.tr("status.network_error")
   end
   if status == "unsupported_platform" then
-    return "not supported on this system"
+    return noctalia.tr("status.unsupported_platform")
   end
   if s.loadFailed then
-    return "provider failed to load"
+    return noctalia.tr("status.provider_failed")
   end
-  return "could not read usage"
+  return noctalia.tr("status.could_not_read")
 end
 
 local function dotColor(name)
@@ -131,6 +131,10 @@ local function windowNode(w, now, key)
     resetAt = time.parseReset(w.resets_at)
   end
   local color = levelColor(levelOf(used))
+  local resetText = ""
+  if show and resetAt ~= nil then
+    resetText = noctalia.tr("window.resets_in", { time = time.fmtCountdown(resetAt, now) })
+  end
 
   return ui.column({ key = key, visible = show, gap = 4, padding = 0 }, {
     ui.row({ key = "head", gap = 8, align = "center" }, {
@@ -141,7 +145,12 @@ local function windowNode(w, now, key)
         color = "on_surface_variant",
         width = 52,
       }),
-      ui.label({ key = "used", text = show and (math.floor(used + 0.5) .. "% used") or "", fontSize = 11, color = color }),
+      ui.label({
+        key = "used",
+        text = show and noctalia.tr("window.used", { percent = math.floor(used + 0.5) }) or "",
+        fontSize = 11,
+        color = color,
+      }),
     }),
     ui.progress({
       key = "bar",
@@ -155,7 +164,7 @@ local function windowNode(w, now, key)
     ui.label({
       key = "reset",
       visible = show and resetAt ~= nil,
-      text = (show and resetAt ~= nil) and ("resets in " .. time.fmtCountdown(resetAt, now)) or "",
+      text = resetText,
       fontSize = 11,
       color = "on_surface_variant",
     }),

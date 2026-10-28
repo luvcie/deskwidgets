@@ -1,12 +1,13 @@
 id           = "luvcie/agent-usage"
-name         = "Agent Usage"
-version      = "1.0.0"
+name         = "Agent Usage Desktop Widget"
+version      = "1.1.0"
 plugin_api   = 24
 author       = "luvcie"
 license      = "MIT"
 icon         = "chart-donut-3"
 description  = "codex, claude and antigravity rate limit bars on the desktop"
 tags         = ["ai", "desktop", "indicator", "utility"]
+dependencies = ["find"]
 
 [[desktop_widget]]
 id    = "desktop"

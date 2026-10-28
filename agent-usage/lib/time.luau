@@ -68,13 +68,13 @@ function M.windowLabel(window)
     mins = window.window_minutes
   end
   if mins >= 10080 then
-    return "weekly"
+    return noctalia.tr("window.weekly")
   end
   if mins >= 1440 then
-    return round(mins / 1440) .. "d"
+    return noctalia.tr("window.days", { n = round(mins / 1440) })
   end
   if mins > 0 then
-    return round(mins / 60) .. "h"
+    return noctalia.tr("window.hours", { n = round(mins / 60) })
   end
   if type(window.label) == "string" and window.label ~= "" then
     return window.label
@@ -89,12 +89,12 @@ function M.fmtCountdown(resetAt, now)
   local hours = (mins % 1440) // 60
   local minutes = mins % 60
   if days > 0 then
-    return days .. "d " .. hours .. "h"
+    return noctalia.tr("countdown.days_hours", { d = days, h = hours })
   end
   if hours > 0 then
-    return hours .. "h " .. minutes .. "m"
+    return noctalia.tr("countdown.hours_minutes", { h = hours, m = minutes })
   end
-  return minutes .. "m"
+  return noctalia.tr("countdown.minutes", { m = minutes })
 end
 
 return M
