@@ -1,0 +1,10 @@
+{
+  "settings.provider.label": "Provider",
+  "settings.provider.description": "Which provider this widget shows. All shows codex, claude and antigravity stacked.",
+  "settings.provider.options.all": "All",
+  "settings.provider.options.codex": "Codex",
+  "settings.provider.options.claude": "Claude",
+  "settings.provider.options.agy": "Antigravity",
+  "settings.interval_seconds.label": "Refresh interval",
+  "settings.interval_seconds.description": "How often to fetch usage (in seconds)."
+}

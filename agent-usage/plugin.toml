@@ -1,0 +1,35 @@
+id           = "luvcie/agent-usage"
+name         = "Agent Usage"
+version      = "1.0.0"
+plugin_api   = 24
+author       = "luvcie"
+license      = "MIT"
+icon         = "chart-donut-3"
+description  = "codex, claude and antigravity rate limit bars on the desktop"
+tags         = ["ai", "desktop", "indicator", "utility"]
+
+[[desktop_widget]]
+id    = "desktop"
+entry = "desktop.luau"
+
+  [[desktop_widget.setting]]
+  key             = "provider"
+  type            = "select"
+  label_key       = "settings.provider.label"
+  description_key = "settings.provider.description"
+  default         = "all"
+  options         = [
+    { value = "all", label_key = "settings.provider.options.all" },
+    { value = "codex", label_key = "settings.provider.options.codex" },
+    { value = "claude", label_key = "settings.provider.options.claude" },
+    { value = "agy", label_key = "settings.provider.options.agy" },
+  ]
+
+  [[desktop_widget.setting]]
+  key             = "interval_seconds"
+  type            = "int"
+  label_key       = "settings.interval_seconds.label"
+  description_key = "settings.interval_seconds.description"
+  default         = 120
+  min             = 30
+  max             = 3600
